@@ -22,11 +22,7 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Index()
     {
-      // var OrderViewModel = new OrderViewModel();
-
-      ViewBag.Order = new OrderViewModel();
-
-      return View("index");
+      return View("index", new OrderViewModel());
     }
 
     public IActionResult Privacy()

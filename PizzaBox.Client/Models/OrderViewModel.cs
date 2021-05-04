@@ -4,7 +4,7 @@ namespace PizzaBox.Client.Models
 {
   public class OrderViewModel
   {
-    public List<string> Crusts { get; set; }
+    public List<string> Crusts { get; set; } = new List<string> { "original", "thin" };
     public List<string> Sizes { get; set; }
     public List<string> Toppings { get; set; }
 
