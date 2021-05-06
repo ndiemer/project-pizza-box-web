@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using PizzaBox.Storage;
 
 namespace PizzaBox.Client
 {
@@ -24,6 +25,7 @@ namespace PizzaBox.Client
     public void ConfigureServices(IServiceCollection services)
     {
       services.AddControllersWithViews();
+      services.AddScoped<UnitOfWork>();
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

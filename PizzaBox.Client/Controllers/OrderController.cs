@@ -6,10 +6,16 @@ namespace PizzaBox.Client.Controllers
   [Route("[controller]")]
   public class OrderController : Controller
   {
-
-    public string Order(OrderViewModel order)
+    [HttpGet]
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public string Create(OrderViewModel order)
     {
-      return order.SelectedCrust;
+      if (ModelState.IsValid)
+      {
+        return "good request";
+      }
+      return "bad request";
     }
   }
 }

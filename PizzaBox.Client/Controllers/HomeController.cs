@@ -6,23 +6,31 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PizzaBox.Client.Models;
+using PizzaBox.Storage;
 
 namespace PizzaBox.Client.Controllers
 {
   [Route("[controller]/[action]")]
   public class HomeController : Controller
   {
-    private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ILogger<HomeController> _logger;
+    private readonly UnitOfWork _unitOfWork;
+
+    // public HomeController(ILogger<HomeController> logger)
+    // {
+    //   _logger = logger;
+    // }
+
+    public HomeController(UnitOfWork unitOfWork)
     {
-      _logger = logger;
+      _unitOfWork = unitOfWork;
     }
 
     [HttpGet]
     public IActionResult Index()
     {
-      return View("index", new OrderViewModel());
+      return View("index", new OrderViewModel(_unitOfWork));
     }
 
     public IActionResult Privacy()
