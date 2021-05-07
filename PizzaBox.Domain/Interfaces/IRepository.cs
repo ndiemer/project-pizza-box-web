@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace PizzaBox.Domain.Interfaces
@@ -8,13 +9,13 @@ namespace PizzaBox.Domain.Interfaces
     /// Read Entries
     /// </summary>
     /// <returns></returns>
-    IEnumerable<T> Select();
+    IEnumerable<T> Select(Func<T, bool> expression);
 
     /// <summary>
     /// Create Entry
     /// </summary>
     /// <param name="t"></param>
-    bool Insert(T t);
+    bool Insert(T entry);
 
     /// <summary>
     /// Update an entry

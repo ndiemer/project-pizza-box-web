@@ -1,6 +1,4 @@
-﻿@model PizzaBox.Client.Models.OrderViewModel
-
-@{
+﻿@{
   ViewData["Title"] = "Home Page";
 }
 
@@ -8,47 +6,5 @@
   <h1 class="display-4">Welcome To PizzaBox</h1>
   <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
-<ul>
-  @foreach (var item in Model.Crusts)
-  {
-    <li>@item</li>
-  }
-</ul>
-<form asp-controller="/order" method="post">
-  @Html.AntiForgeryToken()
 
-  <fieldset>
-    <legend>Crusts</legend>
-
-    @Html.ValidationMessageFor(m => m.SelectedCrust)
-    @foreach (var item in Model.Crusts)
-    {
-      <input type="radio" asp-for="@Model.SelectedCrust" value="@item">
-      <label asp-for="@item">@item</label>
-    }
-  </fieldset>
-
-  <fieldset>
-    <legend>Sizes</legend>
-
-    @Html.ValidationMessageFor(m => m.SelectedSize)
-    @foreach (var item in Model.Sizes)
-    {
-      <input type="radio" asp-for="@Model.SelectedSize" value="@item">
-      <label asp-for="@item">@item</label>
-    }
-  </fieldset>
-
-  <fieldset>
-    <legend>Toppings</legend>
-
-    @Html.ValidationMessageFor(m => m.SelectedToppings)
-    @foreach (var item in Model.Toppings)
-    {
-      <input type="checkbox" id="@item" name="selectedtoppings" value="@item">
-      <label asp-for="@item">@item</label>
-    }
-  </fieldset>
-
-  <button type="submit">Make Pizza</button>
-</form>
+<a asp-controller="order">Make an order</a>

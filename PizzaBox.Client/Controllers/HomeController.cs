@@ -10,17 +10,18 @@ using PizzaBox.Storage;
 
 namespace PizzaBox.Client.Controllers
 {
-  [Route("[controller]/[action]")]
+  [Route("[controller]")]
   public class HomeController : Controller
   {
 
-    private readonly ILogger<HomeController> _logger;
-    private readonly UnitOfWork _unitOfWork;
+    // private readonly ILogger<HomeController> _logger;
 
     // public HomeController(ILogger<HomeController> logger)
     // {
     //   _logger = logger;
     // }
+
+    private readonly UnitOfWork _unitOfWork;
 
     public HomeController(UnitOfWork unitOfWork)
     {
@@ -30,18 +31,22 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Index()
     {
-      return View("index", new OrderViewModel(_unitOfWork));
+      var order = new OrderViewModel();
+
+      order.Load(_unitOfWork);
+
+      return View("order", order);
     }
 
-    public IActionResult Privacy()
-    {
-      return View();
-    }
+    // public IActionResult Privacy()
+    // {
+    //   return View();
+    // }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    // public IActionResult Error()
+    // {
+    //   return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+    // }
   }
 }

@@ -24,11 +24,11 @@ namespace PizzaBox.Client.Models
     [Required(ErrorMessage = "Please select some toppings")]
     public List<string> SelectedToppings { get; set; }
 
-    public OrderViewModel(UnitOfWork unitOfWork)
+    public void Load(UnitOfWork unitOfWork)
     {
-      Crusts = unitOfWork.Crusts.Select().ToList();
-      Sizes = unitOfWork.Sizes.Select().ToList();
-      Toppings = unitOfWork.Toppings.Select().ToList();
+      Crusts = unitOfWork.Crusts.Select(c => c.EntityId > 0).ToList();
+      Sizes = unitOfWork.Sizes.Select(s => s.EntityId > 0).ToList();
+      Toppings = unitOfWork.Toppings.Select(t => t.EntityId > 0).ToList();
     }
 
     public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
