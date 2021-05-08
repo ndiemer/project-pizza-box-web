@@ -10,8 +10,8 @@ jobs:
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ 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 }}
-          SONAR_TOKEN: ${{ dc7ecd844238b87ac29f44bc4c213c954cdb7ac5 }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build:
     runs-on: ubuntu-20.04
