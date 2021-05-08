@@ -21,6 +21,9 @@ jobs:
 
   test:
     runs-on: ubuntu-20.04
+    name: Generate Test Reports
+    env:
+      RESULTS_PATH: test-reports/index.html
     steps:
       - name: XUnit Viewer
         id: xunit-viewer
@@ -28,5 +31,5 @@ jobs:
       - name: Attach the report
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ steps.xunit-viewer.outputs.report-name }}
-          path: ${{ steps.xunit-viewer.outputs.report-dir }}
+          name: alternate-results-path-reports
+          path: ${{ env.RESULTS_PATH }}
