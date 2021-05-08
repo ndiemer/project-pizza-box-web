@@ -1,0 +1,32 @@
+name: cl-pipeline
+on: push
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-20.04
+    steps:
+      -uses: actions/checkout@v2
+        with:
+        fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ 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 }}
+          SONAR_TOKEN: ${{ dc7ecd844238b87ac29f44bc4c213c954cdb7ac5 }}
+
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: dotnet build
+
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: XUnit Viewer
+        id: xunit-viewer
+        uses: AutoModality/action-xunitviewer@v1
+      - name: Attach the report
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ steps.xunit-viewer.outputs.report-name }}
+          path: ${{ steps.xunit-viewer.outputs.report-dir }}
