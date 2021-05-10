@@ -52,9 +52,10 @@ jobs:
       - name: Install SonarCloud scanner
         run: dotnet tool install -g dotnet-sonarscanner
       - name: Build and analyze
-        run: dotnet sonarscanner begin /k:"ndiemer_project-pizza-box-web" /o:"ndiemer" /d:sonar.login=$SONAR_TOKEN /d:sonar.host.url="https://sonarcloud.io"
-        run: dotnet build
-        run: dotnet sonarscanner end /d:sonar.login=$secrets.SONAR_TOKEN
+        run: |
+        dotnet sonarscanner begin /k:"ndiemer_project-pizza-box-web" /o:"ndiemer" /d:sonar.login=$SONAR_TOKEN /d:sonar.host.url="https://sonarcloud.io"
+        dotnet build
+        dotnet sonarscanner end /d:sonar.login=$secrets.SONAR_TOKEN
 
   build:
     runs-on: ubuntu-20.04
