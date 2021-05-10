@@ -23,6 +23,8 @@ namespace PizzaBox.Storage
     {
       builder.Entity<APizza>().HasKey(e => e.EntityId);
       builder.Entity<CustomPizza>().HasBaseType<APizza>();
+      builder.Entity<MeatPizza>().HasBaseType<APizza>();
+      builder.Entity<SupremePizza>().HasBaseType<APizza>();
 
       builder.Entity<Crust>().HasKey(e => e.EntityId);
       builder.Entity<Order>().HasKey(e => e.EntityId);
@@ -57,9 +59,13 @@ namespace PizzaBox.Storage
         new Topping() { EntityId = 5, Name = "Sausage", Price = 3M },
         new Topping() { EntityId = 6, Name = "Black Olives", Price = 1M },
         new Topping() { EntityId = 7, Name = "Green Peppers", Price = 1M }
-
       });
-    }
 
+      // builder.Entity<MeatPizza>().HasData(new MeatPizza[]
+      // {
+      //   new MeatPizza() { EntityId = 1, CrustEntityId = 1, SizeEntityId = 2, OrderEntityId = 1 }
+      // });
+      // new SupremePizza() { EntityId = 2}
+    }
   }
 }
