@@ -1,5 +1,7 @@
-name: cl-pipeline
+name: ci-pipeline
+
 on: push
+
 jobs:
   analyze:
     needs:
@@ -26,15 +28,14 @@ jobs:
     env:
       DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       DOCKER_USER: ${{ secrets.DOCKER_USER }}
-
     needs:
       - analyze
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
       - run: docker image build -f Dockerfile -t pizzabox .
       - run: docker image tag pizzabox ndiemer/pizzabox
+      - run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USER --password-stdin
       - run: docker push ndiemer/pizzabox
       - run: docker logout
 
