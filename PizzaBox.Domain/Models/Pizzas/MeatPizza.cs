@@ -6,7 +6,7 @@ namespace PizzaBox.Domain.Models.Pizzas
   public class MeatPizza : APizza
   {
 
-    public override void AddCrust(Crust crust)
+    public override void AddCrust(Crust crust = null)
     {
       Crust = crust ?? new Crust() { Name = "Original", Price = 4M };
     }

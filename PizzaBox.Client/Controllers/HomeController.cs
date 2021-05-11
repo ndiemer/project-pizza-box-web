@@ -14,17 +14,12 @@ namespace PizzaBox.Client.Controllers
   public class HomeController : Controller
   {
 
-    // private readonly ILogger<HomeController> _logger;
-
-    // public HomeController(ILogger<HomeController> logger)
-    // {
-    //   _logger = logger;
-    // }
-
+    private readonly ILogger<HomeController> _logger;
     private readonly UnitOfWork _unitOfWork;
 
-    public HomeController(UnitOfWork unitOfWork)
+    public HomeController(ILogger<HomeController> logger, UnitOfWork unitOfWork)
     {
+      _logger = logger;
       _unitOfWork = unitOfWork;
     }
 
@@ -35,7 +30,7 @@ namespace PizzaBox.Client.Controllers
 
       order.Load(_unitOfWork);
 
-      return View("order", order);
+      return View("index", order);
     }
 
     public IActionResult Privacy()

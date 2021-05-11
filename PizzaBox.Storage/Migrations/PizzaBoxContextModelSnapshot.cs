@@ -66,6 +66,27 @@ namespace PizzaBox.Storage.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("APizza");
                 });
 
+            modelBuilder.Entity("PizzaBox.Domain.Abstracts.AStore", b =>
+                {
+                    b.Property<long>("EntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("EntityId");
+
+                    b.ToTable("Stores");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AStore");
+                });
+
             modelBuilder.Entity("PizzaBox.Domain.Models.Crust", b =>
                 {
                     b.Property<long>("EntityId")
@@ -104,6 +125,28 @@ namespace PizzaBox.Storage.Migrations
                         });
                 });
 
+            modelBuilder.Entity("PizzaBox.Domain.Models.Customer", b =>
+                {
+                    b.Property<long>("EntityId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("EntityId");
+
+                    b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 1L,
+                            Name = "Nick"
+                        });
+                });
+
             modelBuilder.Entity("PizzaBox.Domain.Models.Order", b =>
                 {
                     b.Property<long>("EntityId")
@@ -111,9 +154,27 @@ namespace PizzaBox.Storage.Migrations
                         .HasColumnType("bigint")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
+                    b.Property<long>("CustomerEntityId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StoreEntityId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("EntityId");
 
+                    b.HasIndex("CustomerEntityId");
+
+                    b.HasIndex("StoreEntityId");
+
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 1L,
+                            CustomerEntityId = 1L,
+                            StoreEntityId = 1L
+                        });
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Size", b =>
@@ -223,6 +284,57 @@ namespace PizzaBox.Storage.Migrations
                     b.HasDiscriminator().HasValue("CustomPizza");
                 });
 
+            modelBuilder.Entity("PizzaBox.Domain.Models.Pizzas.MeatPizza", b =>
+                {
+                    b.HasBaseType("PizzaBox.Domain.Abstracts.APizza");
+
+                    b.HasDiscriminator().HasValue("MeatPizza");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 1L,
+                            CrustEntityId = 1L,
+                            OrderEntityId = 1L,
+                            SizeEntityId = 2L
+                        });
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Models.Pizzas.SupremePizza", b =>
+                {
+                    b.HasBaseType("PizzaBox.Domain.Abstracts.APizza");
+
+                    b.HasDiscriminator().HasValue("SupremePizza");
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Models.Stores.ChicagoStore", b =>
+                {
+                    b.HasBaseType("PizzaBox.Domain.Abstracts.AStore");
+
+                    b.HasDiscriminator().HasValue("ChicagoStore");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 1L,
+                            Name = "ChicagoStore"
+                        });
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Models.Stores.NewYorkStore", b =>
+                {
+                    b.HasBaseType("PizzaBox.Domain.Abstracts.AStore");
+
+                    b.HasDiscriminator().HasValue("NewYorkStore");
+
+                    b.HasData(
+                        new
+                        {
+                            EntityId = 2L,
+                            Name = "NewYorkStore"
+                        });
+                });
+
             modelBuilder.Entity("APizzaTopping", b =>
                 {
                     b.HasOne("PizzaBox.Domain.Abstracts.APizza", null)
@@ -263,6 +375,30 @@ namespace PizzaBox.Storage.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Models.Order", b =>
+                {
+                    b.HasOne("PizzaBox.Domain.Models.Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PizzaBox.Domain.Abstracts.AStore", "Store")
+                        .WithMany("Orders")
+                        .HasForeignKey("StoreEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+
+                    b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("PizzaBox.Domain.Abstracts.AStore", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("PizzaBox.Domain.Models.Crust", b =>
