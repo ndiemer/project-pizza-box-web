@@ -31,17 +31,11 @@ namespace PizzaBox.Client
       {
         if (!string.IsNullOrWhiteSpace(Configuration.GetConnectionString("mssql")))
         {
-          options.UseSqlServer(Configuration.GetConnectionString("mssql"), opts =>
-          {
-            opts.EnableRetryOnFailure(3);
-          });
+          options.UseSqlServer(Configuration.GetConnectionString("mssql"));
         }
         else
         {
-          options.UseNpgsql(Configuration.GetConnectionString("pgsql"), opts =>
-          {
-            opts.EnableRetryOnFailure(3);
-          });
+          options.UseNpgsql(Configuration.GetConnectionString("pgsql"));
         }
       });
     }
