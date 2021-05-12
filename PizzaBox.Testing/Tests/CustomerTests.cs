@@ -5,6 +5,9 @@ namespace PizzaBox.Testing.Tests
 {
   public class CustomerTests
   {
+    /// <summary>
+    /// Tests Customer is created and returns toString correctly
+    /// </summary>
     [Fact]
     public void Test_Customer()
     {

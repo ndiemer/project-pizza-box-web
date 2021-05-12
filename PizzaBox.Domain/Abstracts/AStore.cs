@@ -13,7 +13,7 @@ namespace PizzaBox.Domain.Abstracts
     public List<Order> Orders { get; set; }
 
     /// <summary>
-    /// 
+    /// Overrides ToStrings to display Name property
     /// </summary>
     /// <returns></returns>
     public override string ToString()

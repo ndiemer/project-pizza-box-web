@@ -25,10 +25,22 @@ namespace PizzaBox.Domain.Abstracts
       AddToppings();
     }
 
+    /// <summary>
+    /// Will Set crust property to a Crust object passed to it
+    /// </summary>
+    /// <param name="crust"></param>
     public abstract void AddCrust(Crust crust = null);
 
+    /// <summary>
+    /// Will Set size property to a Size object passed to it
+    /// </summary>
+    /// <param name="size"></param>
     public abstract void AddSize(Size size = null);
 
+    /// <summary>
+    /// Will set Toppings property using a list of Topping objects
+    /// </summary>
+    /// <param name="toppings"></param>
     public abstract void AddToppings(params Topping[] toppings);
   }
 }

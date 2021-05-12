@@ -4,7 +4,7 @@ using PizzaBox.Domain.Models.Pizzas;
 namespace PizzaBox.Domain.Abstracts
 {
   /// <summary>
-  /// 
+  /// Abstract for each component of a pizza
   /// </summary>
   public class AComponent : AEntity
   {
@@ -13,7 +13,7 @@ namespace PizzaBox.Domain.Abstracts
     public ICollection<APizza> Pizzas { get; set; }
 
     /// <summary>
-    /// 
+    /// Overrides ToString to return Name property
     /// </summary>
     /// <returns></returns>
     public override string ToString()

@@ -25,11 +25,18 @@ namespace PizzaBox.Client.Models
     [DataType(DataType.Text)]
     public string SelectedSize { get; set; }
 
+    [Required(ErrorMessage = "Please select a Store")]
+    [DataType(DataType.Text)]
+    public string SelectedStore { get; set; }
+
     [Required(ErrorMessage = "Please select some toppings")]
     public List<string> SelectedToppings { get; set; }
 
-    public string SelectedStore { get; set; }
 
+    /// <summary>
+    /// Sets each List in the OrderViewModel to a List of entries from the UnitOfWork
+    /// </summary>
+    /// <param name="unitOfWork"></param>
     public void Load(UnitOfWork unitOfWork)
     {
       Crusts = unitOfWork.Crusts.Select(c => c.EntityId > 0).ToList();
