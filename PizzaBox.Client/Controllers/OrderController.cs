@@ -29,6 +29,7 @@ namespace PizzaBox.Client.Controllers
         var crust = _unitOfWork.Crusts.Select(c => c.Name == order.SelectedCrust).First();
         var customer = _unitOfWork.Customers.Select(c => c.Name == order.SelectedCustomer).First();
         var size = _unitOfWork.Sizes.Select(s => s.Name == order.SelectedSize).First();
+        var store = _unitOfWork.Stores.Select(s => s.Name == order.SelectedStore).First();
         var toppings = new List<Topping>();
 
         foreach (var item in order.SelectedToppings)

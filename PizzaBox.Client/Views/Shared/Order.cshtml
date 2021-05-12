@@ -6,6 +6,20 @@
 
 <form action="/order" method="post">
   @Html.AntiForgeryToken()
+  <div>
+    <input type="text" asp-for="@Model.SelectedCustomer" value="customer">
+    <label for="customer">Customer</label>
+  </div>
+  <fieldset>
+    <legend>Stores</legend>
+    @foreach (var item in Model.Stores)
+    {
+      <div class="form-check">
+        <input class="form-check-input" type="radio" asp-for="@Model.SelectedStore" value="@item">
+        <label class="form-check-label" for="@item">@item</label>
+      </div>
+    }
+  </fieldset>
 
   <fieldset>
     <legend>Crusts</legend>

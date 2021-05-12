@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using PizzaBox.Domain.Abstracts;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storage;
 using PizzaBox.Storage.Repositories;
@@ -11,6 +12,7 @@ namespace PizzaBox.Client.Models
   {
     public List<Crust> Crusts { get; set; }
     public List<Size> Sizes { get; set; }
+    public List<AStore> Stores { get; set; }
     public List<Topping> Toppings { get; set; }
 
     [Required(ErrorMessage = "Please select a crust")]
@@ -26,10 +28,13 @@ namespace PizzaBox.Client.Models
     [Required(ErrorMessage = "Please select some toppings")]
     public List<string> SelectedToppings { get; set; }
 
+    public string SelectedStore { get; set; }
+
     public void Load(UnitOfWork unitOfWork)
     {
       Crusts = unitOfWork.Crusts.Select(c => c.EntityId > 0).ToList();
       Sizes = unitOfWork.Sizes.Select(s => s.EntityId > 0).ToList();
+      Stores = unitOfWork.Stores.Select(s => s.EntityId > 0).ToList();
       Toppings = unitOfWork.Toppings.Select(t => t.EntityId > 0).ToList();
     }
 
