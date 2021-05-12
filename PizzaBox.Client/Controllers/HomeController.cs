@@ -10,7 +10,7 @@ using PizzaBox.Storage;
 
 namespace PizzaBox.Client.Controllers
 {
-  [Route("[controller]")]
+  [Route("[controller]/[action]")]
   public class HomeController : Controller
   {
 
@@ -26,6 +26,12 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Index()
     {
+      return View();
+    }
+
+    [HttpGet]
+    public IActionResult Order()
+    {
       var order = new OrderViewModel();
 
       order.Load(_unitOfWork);
@@ -33,6 +39,7 @@ namespace PizzaBox.Client.Controllers
       return View("order", order);
     }
 
+    [HttpGet]
     public IActionResult Privacy()
     {
       return View();

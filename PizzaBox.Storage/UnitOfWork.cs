@@ -6,6 +6,7 @@ namespace PizzaBox.Storage
   {
     private readonly PizzaBoxContext _context;
     public CrustRepository Crusts { get; }
+    public CustomerRepository Customers { get; set; }
     public OrderRepository Orders { get; set; }
     public PizzaRepository Pizzas { get; set; }
     public SizeRepository Sizes { get; }

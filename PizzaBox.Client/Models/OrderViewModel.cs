@@ -17,6 +17,8 @@ namespace PizzaBox.Client.Models
     [DataType(DataType.Text)]
     public string SelectedCrust { get; set; }
 
+    public string SelectedCustomer { get; set; }
+
     [Required(ErrorMessage = "Please select a Size")]
     [DataType(DataType.Text)]
     public string SelectedSize { get; set; }

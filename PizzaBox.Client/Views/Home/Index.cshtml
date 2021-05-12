@@ -1,5 +1,7 @@
 ﻿@{
   ViewData["Title"] = "Home Page";
 }
-
-<a asp-controller="Order">Make an order</a>
+<form asp-controller="Home" asp-action="Order" method="get">
+  <input type="text" name="customer" id="customer">
+  <button type="submit">Sign in</button>
+</form>
