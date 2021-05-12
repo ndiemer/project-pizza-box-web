@@ -57,10 +57,10 @@ namespace PizzaBox.Storage
         new Crust() { EntityId = 3, Name = "Stuffed", Price = 7M }
       });
 
-      builder.Entity<Order>().HasData(new[]
-      {
-        new Order() { EntityId = 1, CustomerEntityId = 1, StoreEntityId = 1,  }
-      });
+      // builder.Entity<Order>().HasData(new[]
+      // {
+      //   new Order() { EntityId = 1, CustomerEntityId = 1, StoreEntityId = 1,  }
+      // });
 
       builder.Entity<Size>().HasData(new[]
       {
@@ -90,14 +90,14 @@ namespace PizzaBox.Storage
         new Topping() { EntityId = 7, Name = "Green Peppers", Price = 1M }
       });
 
-      builder.Entity<MeatPizza>().HasData(
-        new
-        {
-          EntityId = 1L,
-          CrustEntityId = 1L,
-          SizeEntityId = 2L,
-          OrderEntityId = 1L,
-        });
+      // builder.Entity<MeatPizza>().HasData(
+      //   new
+      //   {
+      //     EntityId = 1L,
+      //     CrustEntityId = 1L,
+      //     SizeEntityId = 2L,
+      //     OrderEntityId = 1L,
+      //   });
     }
   }
 }
