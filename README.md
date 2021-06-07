@@ -35,4 +35,4 @@ Project PizzaBox is a web application that provides a way for customers to order
 - From main folder run : 'dotnet run -p PizzaBox.Client' to run locally
 
 ## License
-This project uses the following license: <LICENCE>.
+This project uses the following license: <https://github.com/ndiemer/project-pizza-box-web/blob/client-branch/LICENSE>.
